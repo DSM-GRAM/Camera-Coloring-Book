@@ -19,7 +19,8 @@
             android:gravity="center"
             android:text="컬러링"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:fontFamily="@font/nanum_square_r"/>
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
