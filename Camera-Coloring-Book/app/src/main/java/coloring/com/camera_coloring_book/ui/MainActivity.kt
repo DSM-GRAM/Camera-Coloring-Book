@@ -11,6 +11,10 @@ import coloring.com.camera_coloring_book.ui.palette.PaletteFragment
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
+/*
+TODO : 사진 리스트가 아래에서 위로 올라오게 하기
+TODO : 색깔들 저장 방법 찾기
+*/
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
