@@ -8,14 +8,16 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import coloring.com.camera_coloring_book.R
 import coloring.com.camera_coloring_book.ui.coloring.ColoringFragment
 import coloring.com.camera_coloring_book.ui.palette.PaletteFragment
+import coloring.com.camera_coloring_book.ui.palette.PaletteFragment.Companion.behavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 /*
-TODO : 사진 리스트가 아래에서 위로 올라오게 하기
 TODO : 색깔들 저장 방법 찾기
 */
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,7 +37,16 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(p0: TabLayout.Tab?) {}
         })
     }
+
+    override fun onBackPressed() {
+        if(behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            viewPager.currentItem = 0
+            behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+        else super.onBackPressed()
+    }
 }
+
 
 class TabPagerAdapter(fm: FragmentManager, private val tabCount : Int) : FragmentStatePagerAdapter(fm) {
 

@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.ui.palette
+package coloring.com.camera_coloring_book.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View

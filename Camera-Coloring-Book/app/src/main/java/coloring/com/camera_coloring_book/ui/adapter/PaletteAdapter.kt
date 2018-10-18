@@ -1,12 +1,15 @@
-package coloring.com.camera_coloring_book.ui.palette
+package coloring.com.camera_coloring_book.ui.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coloring.com.camera_coloring_book.model.ARGB
+import coloring.com.camera_coloring_book.ui.palette.PaletteFragment.Companion.behavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.item_palette.view.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class PaletteAdapter(private val context : Context,
                      private val paletteType : Int,
@@ -21,14 +24,26 @@ class PaletteAdapter(private val context : Context,
 
     override fun onBindViewHolder(holder: PaletteViewHolder, position: Int) {
 
-        holder.itemView.color_view.setBackgroundCircleColor(Color.argb(colorList[position].A, colorList[position].R, colorList[position].G, colorList[position].B))
+        holder.itemView.color_view.setBackgroundCircleColor(
+                Color.argb(colorList[position].A,
+                        colorList[position].R,
+                        colorList[position].G,
+                        colorList[position].B))
+        // 내 팔레트 부분
+        if(paletteType == 0) {
+            if (position == itemCount - 1) {
+                holder.itemView.color_view.setBackgroundCircleColor(
+                        Color.argb(255,100, 140, 186))
+                holder.itemView.add_view.apply {
+                    visibility = View.VISIBLE
+                    onClick {
+                        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    }
+                }
+            }
+        }
         holder.itemView.color_view.setOnClickListener {
             when(paletteType){
-                // 내 팔레트 부분
-                0->{
-                    if(position == itemCount-1)
-                        context.startActivity(Intent(context, AddColorActivity::class.java))
-                }
                 // 팔레트 수정 부분
                 1->{
 
