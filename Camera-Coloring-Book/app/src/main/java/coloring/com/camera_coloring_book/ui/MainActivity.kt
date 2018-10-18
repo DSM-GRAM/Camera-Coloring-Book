@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter
 import coloring.com.camera_coloring_book.R
 import coloring.com.camera_coloring_book.ui.coloring.ColoringFragment
 import coloring.com.camera_coloring_book.ui.palette.PaletteFragment
-import com.google.android.material.R.styleable.TabLayout
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
 /*
