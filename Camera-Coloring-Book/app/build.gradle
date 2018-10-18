@@ -44,5 +44,7 @@ dependencies {
     implementation 'com.owater.library:CircleTextViewlibrary:0.8.3'
     //ColoringView
     implementation 'com.seotm.coloringview:coloringview:1.0'
-
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 }
