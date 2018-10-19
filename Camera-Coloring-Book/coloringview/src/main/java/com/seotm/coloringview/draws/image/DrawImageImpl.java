@@ -28,6 +28,10 @@ public class DrawImageImpl implements DrawImage {
         setupImageBounds();
     }
 
+    public void setDrawableImg(Drawable drawableImg) {
+        this.drawableImg = drawableImg;
+    }
+
     private void setupImageBounds() {
         SetupImageBounds setupBounds = new SetupImageBounds(this);
         setupBounds.setupImageBounds(viewSize);

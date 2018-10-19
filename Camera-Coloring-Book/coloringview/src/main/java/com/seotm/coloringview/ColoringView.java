@@ -1,6 +1,7 @@
 package com.seotm.coloringview;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -25,6 +26,7 @@ import androidx.annotation.Nullable;
 public class ColoringView extends View {
 
     final DrawImage drawImage;
+    Bitmap bitmap;
     int paintColor;
     boolean enableColoringBlackColor;
     boolean flag = false;
@@ -66,8 +68,17 @@ public class ColoringView extends View {
         }
     }
 
+    public void setStateImage(ColoringView coloringView){
+        this.bitmap = coloringView.drawImage.getImage();
+        invalidate();
+    }
+
     public ColoringState getState() {
         return new ColoringState(this);
+    }
+
+    public Bitmap getStateImage(){
+        return this.bitmap;
     }
 
     public void setFillColorListener(OnFillColorListener listener) {
@@ -90,8 +101,6 @@ public class ColoringView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         super.onTouchEvent(event);
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            if (!flag) {
-                flag = true;
                 Log.d("tag","a");
                 int x = (int) event.getX();
                 int y = (int) event.getY();
@@ -103,36 +112,40 @@ public class ColoringView extends View {
                     return true;
                 }
 
-                new DrawFloodFilter(bitmapPosition)
-                        .draw(paintColor, image);
-                invalidate();
+                int pixel = image.getPixel(bitmapPosition.x,bitmapPosition.y);
+
+                int current_red = Color.red(pixel);
+                int current_green = Color.green(pixel);
+                int current_blue = Color.blue(pixel);
+
+
+                if(current_red == 255 && current_green == 255 & current_blue == 255){
+                    new DrawFloodFilter(bitmapPosition)
+                            .draw(paintColor, image);
+                    invalidate();
+                } else {
+                    new DrawFloodFilter(bitmapPosition)
+                            .draw(Color.parseColor("#ffffff"), image);
+                    invalidate();
+                }
 
                 if (fillColorListener != null) {
                     fillColorListener.onFillColor(paintColor);
                 }
-            } else {
-                flag = false;
-                Log.d("tag","b");
-                int x = (int) event.getX();
-                int y = (int) event.getY();
-                Position bitmapPosition = drawImage.toBitmapPosition(x, y);
-                Bitmap image = drawImage.getImage();
 
-                if (!new ColorValidation(enableColoringBlackColor)
-                        .isValidPosition(bitmapPosition, image)) {
-                    return true;
-                }
 
-                new DrawFloodFilter(bitmapPosition)
-                        .draw(Color.parseColor("#ffffff"), image);
-                invalidate();
 
-                if (fillColorListener != null){
-                    fillColorListener.onFillColor(paintColor);
-                }
-
-            }
         }
         return true;
+    }
+
+    public void resetColor(){
+        Bitmap image = drawImage.getImage();
+        int x = (int) getX();
+        int y = (int) getY();
+        Position bitmapPosition = drawImage.toBitmapPosition(x, y);
+
+        new DrawFloodFilter(bitmapPosition)
+                .draw(Color.parseColor("#fff"),image);
     }
 }

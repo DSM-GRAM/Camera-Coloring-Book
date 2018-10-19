@@ -1,6 +1,7 @@
 package com.seotm.coloringview;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
@@ -14,6 +15,10 @@ public class ColoringState {
 
     ColoringState(@NonNull ColoringView view) {
         this.bitmap = view.drawImage.getImage();
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
     void restoreState(@NonNull ColoringView view) {

@@ -8,7 +8,6 @@
         android:id="@+id/coloringitem"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:paintColor="#ffff00"
-        app:imageSrc="@drawable/coloring_img1"/>
+        app:paintColor="#ffff00"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
