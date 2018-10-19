@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coloring_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/coloring_toolbar"
@@ -42,11 +42,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:fontFamily="@font/nanum_square_r"
                 android:id="@+id/coloring_save_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
+                android:fontFamily="@font/nanum_square_r"
                 android:text="저장"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
@@ -58,13 +58,13 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <com.seotm.coloringview.ColoringView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/coloring_coloringview"
-        app:layout_constraintTop_toBottomOf="@id/coloring_toolbar"
-        app:layout_constraintBottom_toTopOf="@id/coloring_palette_tv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:imageSrc="@drawable/coloring_img1"/>
+        app:layout_constraintBottom_toTopOf="@id/coloring_palette_tv"
+        app:layout_constraintTop_toBottomOf="@id/coloring_toolbar" />
 
 
     <TextView
