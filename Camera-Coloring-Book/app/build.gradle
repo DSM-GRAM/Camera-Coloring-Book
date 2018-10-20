@@ -50,5 +50,5 @@ dependencies {
     implementation 'com.otaliastudios:zoomlayout:1.3.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
     implementation files('libs/android-zoom-view.jar')
-    implementation project(':coloringview')
+//    implementation project(':coloringview')
 }

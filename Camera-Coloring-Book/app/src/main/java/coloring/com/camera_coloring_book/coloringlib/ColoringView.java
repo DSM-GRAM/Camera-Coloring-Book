@@ -1,7 +1,6 @@
-package com.seotm.coloringview;
+package coloring.com.camera_coloring_book.coloringlib;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,13 +10,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.seotm.coloringview.draws.Position;
-import com.seotm.coloringview.draws.image.DrawImage;
-import com.seotm.coloringview.draws.image.DrawImageImpl;
-import com.seotm.coloringview.floodFill.DrawFloodFilter;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
+import coloring.com.camera_coloring_book.coloringlib.draws.Position;
+import coloring.com.camera_coloring_book.coloringlib.draws.image.DrawImage;
+import coloring.com.camera_coloring_book.coloringlib.draws.image.DrawImageImpl;
 
 /**
  * Created by seotm on 08.06.17.
@@ -69,8 +66,7 @@ public class ColoringView extends View {
     }
 
     public void setStateImage(){
-        BitMapHolder bitMapHolder = new BitMapHolder();
-        bitMapHolder.setBitmap(drawImage.getImage());
+        BitMapHolder.bitmap = drawImage.getImage();
         invalidate();
     }
 
@@ -79,7 +75,7 @@ public class ColoringView extends View {
     }
 
     public Bitmap getStateImage(){
-        return new BitMapHolder().getBitmap();
+        return BitMapHolder.bitmap;
     }
 
     public void setFillColorListener(OnFillColorListener listener) {

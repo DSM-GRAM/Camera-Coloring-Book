@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="colorTmp">#648CBA</color>
+    <color name="defaultPaintColor">#FF0000</color>
 </resources>

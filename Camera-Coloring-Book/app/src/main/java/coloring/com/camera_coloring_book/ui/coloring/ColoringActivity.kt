@@ -3,6 +3,7 @@ package coloring.com.camera_coloring_book.ui.coloring
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -16,18 +17,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import coloring.com.camera_coloring_book.R
-import com.seotm.coloringview.ColoringState
-import com.seotm.coloringview.ColoringView
+import coloring.com.camera_coloring_book.coloringlib.ColoringView
+import coloring.com.camera_coloring_book.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_coloring.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_coloringview.*
 import kotlinx.android.synthetic.main.fragment_coloring.*
 import kotlinx.android.synthetic.main.item_coloringview.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.sdk27.coroutines.onTouch
+import org.jetbrains.anko.toast
 import pl.polidea.view.ZoomView
 
 class ColoringActivity : AppCompatActivity() {
     lateinit var coloring_frame : ColoringView
+    var current_bitmap : Bitmap? = null
     var resid : Int = 0
 
 
@@ -42,7 +46,15 @@ class ColoringActivity : AppCompatActivity() {
         val view = layoutInflater.inflate(R.layout.item_coloringview, null, false)
         coloring_frame = view.findViewById<ColoringView>(R.id.coloringitem)
 
+        current_bitmap = coloring_frame.stateImage
 
+        if(current_bitmap != null){
+            coloring_frame.setImage(current_bitmap)
+            Log.d("rere","current bitmap")
+        } else {
+            coloring_frame.setImage(resources.getDrawable(resid))
+            Log.d("rere","null")
+        }
 
         val zoom = ZoomView(this).apply {
             addView(view)
@@ -116,7 +128,12 @@ class ColoringActivity : AppCompatActivity() {
 
                 dialog.window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
-                ok_btn.setOnClickListener { dialog.dismiss() }
+                ok_btn.setOnClickListener {
+                    dialog.dismiss()
+
+                    toast("저장이 완료되었습니다.")
+                    finish()
+                }
 
                 cancel_btn.setOnClickListener { dialog.dismiss() }
             }
@@ -127,21 +144,25 @@ class ColoringActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("rere","resume")
-        if(coloring_frame.stateImage != null){
-            coloring_frame.setImage(coloring_frame.stateImage)
-            Log.d("rere","current bitmap")
-        } else {
-            coloring_frame.setImage(resources.getDrawable(resid))
-            Log.d("rere","null")
-        }
-
     }
 
     override fun onPause() {
         super.onPause()
-        coloring_frame.setStateImage(coloring_frame)
-        Log.d("rere","pause")
+        coloring_frame.setStateImage()
+        current_bitmap = coloring_frame.stateImage
+        Log.d("rere","pause " + current_bitmap.toString())
     }
 
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+    }
 }
