@@ -1,11 +1,13 @@
 package coloring.com.camera_coloring_book.ui.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coloring.com.camera_coloring_book.R
+import coloring.com.camera_coloring_book.ui.palette.AddColorActivity
 import kotlinx.android.synthetic.main.item_photo.view.*
 
 class AlbumAdapter(private val context: Context,
@@ -17,6 +19,13 @@ class AlbumAdapter(private val context: Context,
         val img = decodeSampledBitmapFromURI(albumList[position], 200, 200)
         if (img != null) holder.itemView.photo.setImageBitmap(img)
         else holder.itemView.photo.setImageResource(R.drawable.ic_launcher_background)
+
+        holder.itemView.photo.setOnClickListener {
+            val intent = Intent(context, AddColorActivity::class.java)
+            if(img != null) intent.putExtra("path", albumList[position])
+            else intent.putExtra("path", "noPath")
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = albumList.size

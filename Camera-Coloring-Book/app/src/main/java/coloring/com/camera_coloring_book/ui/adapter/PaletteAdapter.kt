@@ -13,7 +13,12 @@ import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class PaletteAdapter(private val context : Context,
                      private val paletteType : Int,
-                     private val colorList : ArrayList<ARGB>): RecyclerView.Adapter<PaletteViewHolder>() {
+                     private var colorList : ArrayList<ARGB>): RecyclerView.Adapter<PaletteViewHolder>() {
+
+    fun changeList(list : ArrayList<ARGB>){
+        colorList = list
+        notifyDataSetChanged()
+    }
 
     fun add(argb : ARGB){
         colorList.add(argb)

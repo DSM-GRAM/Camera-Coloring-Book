@@ -2,6 +2,8 @@ package coloring.com.camera_coloring_book.ui.palette
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
@@ -24,6 +26,11 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_palette.*
 import java.util.*
 import kotlin.collections.ArrayList
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
+import android.content.Context.MODE_PRIVATE
+import coloring.com.camera_coloring_book.TinyDB
+
 
 class PaletteFragment : Fragment(){
 
@@ -38,7 +45,8 @@ class PaletteFragment : Fragment(){
 
         behavior = BottomSheetBehavior.from(album_list_bottom_sheet)
 
-        paletteAdapter = PaletteAdapter(context!!, 0, ArrayList())
+        paletteAdapter = PaletteAdapter(context!!, 0, loadSharedPreferencesData())
+        paletteAdapter.notifyDataSetChanged()
         getAllImages((activity as MainActivity?)!!)
 
         val paletteLayoutManager
@@ -57,13 +65,23 @@ class PaletteFragment : Fragment(){
             layoutManager = GridLayoutManager(context, 3)
             smoothScrollToPosition(0)
         }
-        paletteAdapter.add(ARGB(255, 100, 140, 186))
-        paletteAdapter.add(ARGB(255, 255, 64, 129))
+
+        //paletteAdapter.add(ARGB(255, 100, 140, 186))
+        //paletteAdapter.add(ARGB(255, 255, 64, 129))
         paletteAdapter.add(ARGB())
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_palette, container, false)
+    }
+
+    fun onClick(view : View){
+
+    }
+
+    private fun loadSharedPreferencesData() : ArrayList<ARGB> {
+        val db = TinyDB(context)
+        return db.getListObject("color", ARGB::class.java) as ArrayList<ARGB>
     }
 
     @SuppressLint("Recycle")
@@ -85,4 +103,6 @@ class PaletteFragment : Fragment(){
         albumAdapter = AlbumAdapter(context!!, albumList)
         albumAdapter.notifyDataSetChanged()
     }
+
+
 }
