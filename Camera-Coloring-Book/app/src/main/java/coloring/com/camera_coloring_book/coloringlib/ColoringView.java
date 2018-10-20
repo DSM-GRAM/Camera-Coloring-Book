@@ -24,6 +24,7 @@ public class ColoringView extends View {
 
     final DrawImage drawImage;
     Bitmap bitmap;
+    private int resid;
     int paintColor;
     boolean enableColoringBlackColor;
     boolean flag = false;
@@ -76,6 +77,14 @@ public class ColoringView extends View {
 
     public Bitmap getStateImage(){
         return BitMapHolder.bitmap;
+    }
+
+    public void setResid(int resid) {
+        BitMapHolder.resid = resid;
+    }
+
+    public int getResid() {
+        return BitMapHolder.resid;
     }
 
     public void setFillColorListener(OnFillColorListener listener) {

@@ -23,7 +23,6 @@ import kotlinx.android.synthetic.main.activity_coloring.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_coloringview.*
 import kotlinx.android.synthetic.main.fragment_coloring.*
-import kotlinx.android.synthetic.main.item_coloringview.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.sdk27.coroutines.onTouch
 import org.jetbrains.anko.toast
@@ -34,7 +33,10 @@ class ColoringActivity : AppCompatActivity() {
     var current_bitmap : Bitmap? = null
     var resid : Int = 0
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,26 +45,27 @@ class ColoringActivity : AppCompatActivity() {
 
         resid = intent.extras.getInt("resid")
 
-        val view = layoutInflater.inflate(R.layout.item_coloringview, null, false)
-        coloring_frame = view.findViewById<ColoringView>(R.id.coloringitem)
+        coloring_frame = findViewById<ColoringView>(R.id.coloringitem)
 
         current_bitmap = coloring_frame.stateImage
 
-        if(current_bitmap != null){
+        if(current_bitmap != null && resid == coloring_frame.resid){
             coloring_frame.setImage(current_bitmap)
             Log.d("rere","current bitmap")
         } else {
             coloring_frame.setImage(resources.getDrawable(resid))
+            Log.d("LOADDEBUG",resid.toString())
+            Log.d("LOADDEBUG",coloring_frame.resid.toString())
             Log.d("rere","null")
         }
+//
+//        val zoom = ZoomView(this).apply {
+//            addView(view)
+//            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+//            maxZoom = 4f
+//        }
 
-        val zoom = ZoomView(this).apply {
-            addView(view)
-            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            maxZoom = 4f
-        }
-
-        coloring_coloringview.addView(zoom)
+//        coloring_coloringview.addView(zoom)
 
         coloring_frame.setOnTouchListener { view, motionEvent ->
             when(motionEvent.action){
@@ -149,7 +152,8 @@ class ColoringActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         coloring_frame.setStateImage()
-        current_bitmap = coloring_frame.stateImage
+        coloring_frame.resid = resid
+        Log.d("SAVEDEBUG",resid.toString())
         Log.d("rere","pause " + current_bitmap.toString())
     }
 
