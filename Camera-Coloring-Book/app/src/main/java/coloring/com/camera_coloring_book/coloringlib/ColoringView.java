@@ -125,15 +125,15 @@ public class ColoringView extends View {
                 int current_blue = Color.blue(pixel);
 
 
-                if(current_red == 255 && current_green == 255 & current_blue == 255){
+//                if(current_red == 255 && current_green == 255 & current_blue == 255){
                     new DrawFloodFilter(bitmapPosition)
                             .draw(paintColor, image);
                     invalidate();
-                } else {
-                    new DrawFloodFilter(bitmapPosition)
-                            .draw(Color.parseColor("#ffffff"), image);
-                    invalidate();
-                }
+//                } else {
+//                    new DrawFloodFilter(bitmapPosition)
+//                            .draw(Color.parseColor("#ffffff"), image);
+//                    invalidate();
+//                }
 
                 if (fillColorListener != null) {
                     fillColorListener.onFillColor(paintColor);
