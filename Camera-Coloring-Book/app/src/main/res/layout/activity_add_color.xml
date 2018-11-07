@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.palette.AddColorActivity">
+    tools:context=".ui.palette.AddPaletteColorActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -16,17 +16,18 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_square_r"
             android:gravity="center"
             android:text="색 추가하기"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:fontFamily="@font/nanum_square_r"/>
+            android:textSize="16sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageView
+    <coloring.com.ccb.ui.view.TouchImageView
         android:id="@+id/img"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

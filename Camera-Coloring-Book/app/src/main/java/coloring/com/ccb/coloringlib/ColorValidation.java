@@ -1,10 +1,10 @@
-package coloring.com.camera_coloring_book.coloringlib;
+package coloring.com.ccb.coloringlib;
 
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import coloring.com.camera_coloring_book.coloringlib.draws.Position;
+import coloring.com.ccb.coloringlib.draws.Position;
 
 /**
  * Created by seotm on 27.07.17.

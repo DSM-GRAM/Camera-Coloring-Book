@@ -1,3 +1,3 @@
-package coloring.com.camera_coloring_book.model
+package coloring.com.ccb.model
 
-data class ColoringItem(val imgresid : Int) {}
+data class ColoringItem(val imgResId : Int)

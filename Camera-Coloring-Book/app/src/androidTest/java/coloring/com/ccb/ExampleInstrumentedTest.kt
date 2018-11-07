@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book
+package coloring.com.ccb
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

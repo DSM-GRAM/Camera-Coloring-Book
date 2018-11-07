@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.ui.coloring
+package coloring.com.ccb.ui.coloring
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import coloring.com.camera_coloring_book.adapter.ColoringListAdapter
-import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.model.ColoringItem
+import coloring.com.ccb.adapter.ColoringListAdapter
+import coloring.com.ccb.R
+import coloring.com.ccb.model.ColoringItem
 import kotlinx.android.synthetic.main.fragment_coloring.*
 
 class ColoringFragment : Fragment(){

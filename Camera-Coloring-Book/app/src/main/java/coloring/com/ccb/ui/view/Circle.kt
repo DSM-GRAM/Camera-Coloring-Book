@@ -1,5 +1,6 @@
-package coloring.com.camera_coloring_book.ui.view
+package coloring.com.ccb.ui.view
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
@@ -13,6 +14,7 @@ class Circle : View {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         val paint = Paint()
         mRadius = (Math.min(height, width) / 2).toFloat()

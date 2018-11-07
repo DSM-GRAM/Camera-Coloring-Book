@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.coloringlib;
+package coloring.com.ccb.coloringlib;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import coloring.com.camera_coloring_book.R;
+import coloring.com.ccb.R;
 
 /**
  * Created by seotm on 12.06.17.

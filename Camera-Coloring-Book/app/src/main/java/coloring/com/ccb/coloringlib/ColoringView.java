@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.coloringlib;
+package coloring.com.ccb.coloringlib;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,9 +12,9 @@ import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
-import coloring.com.camera_coloring_book.coloringlib.draws.Position;
-import coloring.com.camera_coloring_book.coloringlib.draws.image.DrawImage;
-import coloring.com.camera_coloring_book.coloringlib.draws.image.DrawImageImpl;
+import coloring.com.ccb.coloringlib.draws.Position;
+import coloring.com.ccb.coloringlib.draws.image.DrawImage;
+import coloring.com.ccb.coloringlib.draws.image.DrawImageImpl;
 
 /**
  * Created by seotm on 08.06.17.

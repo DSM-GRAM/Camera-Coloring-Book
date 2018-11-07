@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.adapter
+package coloring.com.ccb.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.model.ColoringItem
-import coloring.com.camera_coloring_book.ui.coloring.ColoringActivity
+import coloring.com.ccb.R
+import coloring.com.ccb.model.ColoringItem
+import coloring.com.ccb.ui.coloring.ColoringActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_coloring.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -20,11 +20,11 @@ class ColoringListAdapter(val items : ArrayList<ColoringItem>,
         = ColoringViewHolder(parent)
 
     override fun onBindViewHolder(holder: ColoringViewHolder, position: Int) {
-        Glide.with(context).load(items[position].imgresid).into(holder.itemView.coloring_list_item)
+        Glide.with(context).load(items[position].imgResId).into(holder.itemView.coloring_list_item)
 
         holder.itemView.coloring_list_item.onClick {
             val intent = Intent(context, ColoringActivity::class.java)
-            intent.putExtra("resid",items[position].imgresid)
+            intent.putExtra("resId",items[position].imgResId)
             context.startActivity(intent)
         }
     }

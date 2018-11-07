@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.ui.adapter
+package coloring.com.ccb.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.ui.palette.AddColorActivity
+import coloring.com.ccb.R
+import coloring.com.ccb.ui.palette.AddPaletteColorActivity
 import kotlinx.android.synthetic.main.item_photo.view.*
 
 class AlbumAdapter(private val context: Context,
@@ -48,7 +48,7 @@ class AlbumAdapter(private val context: Context,
         else holder.itemView.photo.setImageResource(R.drawable.ic_launcher_background)
 
         holder.itemView.photo.setOnClickListener {
-            val intent = Intent(context, AddColorActivity::class.java)
+            val intent = Intent(context, AddPaletteColorActivity::class.java)
             if(img != null) intent.putExtra("path", albumList[position])
             else intent.putExtra("path", "noPath")
             context.startActivity(intent)

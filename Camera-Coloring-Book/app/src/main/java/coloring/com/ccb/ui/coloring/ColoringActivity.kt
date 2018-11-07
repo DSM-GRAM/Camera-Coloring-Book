@@ -1,6 +1,5 @@
-package coloring.com.camera_coloring_book.ui.coloring
+package coloring.com.ccb.ui.coloring
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.graphics.Bitmap
 import android.graphics.drawable.ColorDrawable
@@ -8,154 +7,108 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.coloringlib.ColoringView
+import coloring.com.ccb.R
+import coloring.com.ccb.adapter.PaletteAdapter
+import coloring.com.ccb.util.TinyDBUtil.loadSharedPreferencesData
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import kotlinx.android.synthetic.main.activity_coloring.*
+import kotlinx.android.synthetic.main.dialog_coloringview.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast
 
 class ColoringActivity : AppCompatActivity() {
-    lateinit var coloring_frame : ColoringView
-    var current_bitmap : Bitmap? = null
-    var resid : Int = 0
+    private var currentBitmap: Bitmap? = null
+    private var resId: Int = 0
+    private lateinit var paletteAdapter : PaletteAdapter
 
     override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coloring)
 
-        resid = intent.extras.getInt("resid")
+        resId = intent.extras!!.getInt("resId")
 
-        coloring_frame = findViewById<ColoringView>(R.id.coloringitem)
+        currentBitmap = coloring_work_view.stateImage
 
-        current_bitmap = coloring_frame.stateImage
-
-        if(current_bitmap != null && resid == coloring_frame.resid){
-            coloring_frame.setImage(current_bitmap)
-            Log.d("rere","current bitmap")
+        if (currentBitmap != null && resId == coloring_work_view.resid) {
+            coloring_work_view.setImage(currentBitmap)
+            Log.d("rere", "current bitmap")
         } else {
-            coloring_frame.setImage(resources.getDrawable(resid))
-            Log.d("LOADDEBUG",resid.toString())
-            Log.d("LOADDEBUG",coloring_frame.resid.toString())
-            Log.d("rere","null")
+            coloring_work_view.setImage(resources.getDrawable(resId))
+            Log.d("LOADDEBUG", resId.toString())
+            Log.d("LOADDEBUG", coloring_work_view.resid.toString())
+            Log.d("rere", "null")
         }
-//
-//        val zoom = ZoomView(this).apply {
-//            addView(view)
-//            layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-//            maxZoom = 4f
-//        }
 
-//        coloring_coloringview.addView(zoom)
-
-        coloring_frame.setOnTouchListener { view, motionEvent ->
-            when(motionEvent.action){
+        coloring_work_view.setOnTouchListener { view, motionEvent ->
+            when (motionEvent.action) {
                 MotionEvent.ACTION_POINTER_DOWN -> return@setOnTouchListener true
                 else -> return@setOnTouchListener false
             }
         }
 
-        coloring_reset_tv.onClick { ShowDialog("reset") }
+        coloring_reset_tv.onClick { RSDialog("reset") }
+        coloring_save_tv.onClick { RSDialog("save") }
 
-        coloring_save_tv.onClick { ShowDialog("save") }
-
-
-
-//        coloring_coloringview.setOnTouchListener { v, event ->
-//            when (event.action) {
-//                else -> false
-//            }
-
-
-
+        coloring_palette_rv.apply {
+            adapter = PaletteAdapter(applicationContext, 2, loadSharedPreferencesData(applicationContext), coloring_work_view)
+            layoutManager = FlexboxLayoutManager(applicationContext).apply {
+                flexDirection = FlexDirection.COLUMN
+                justifyContent = JustifyContent.CENTER
+            }
+        }
     }
 
-    fun ShowDialog(type: String) {
+    private fun RSDialog(type: String) {
         val dialog = Dialog(this)
 
         when (type) {
             "reset" -> {
-
                 dialog.setContentView(R.layout.dialog_coloringview)
-                val title = dialog.findViewById<TextView>(R.id.dialog_coloring_tv)
-                val ok_btn = dialog.findViewById<Button>(R.id.coloring_ok_btn)
-                val cancel_btn = dialog.findViewById<Button>(R.id.coloring_cancel_btn)
 
-                title.text = "초기화 하시겠습니까?"
+                dialog.window!!.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
-                dialog.show()
-
-                dialog.window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-                dialog.window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
-
-                ok_btn.setOnClickListener {
-                    coloring_frame.setImage(resources.getDrawable(resid))
+                dialog.dialog_coloring_tv.text = "초기화 하시겠습니까?"
+                dialog.coloring_ok_btn.setOnClickListener {
+                    coloring_work_view.setImage(resources.getDrawable(resId))
                     dialog.dismiss()
                 }
+                dialog.coloring_cancel_btn.setOnClickListener { dialog.dismiss() }
 
-                cancel_btn.setOnClickListener { dialog.dismiss() }
-
+                dialog.show()
             }
-
             "save" -> {
                 dialog.setContentView(R.layout.dialog_coloringview)
-                val title = dialog.findViewById<TextView>(R.id.dialog_coloring_tv)
-                val ok_btn = dialog.findViewById<Button>(R.id.coloring_ok_btn)
-                val cancel_btn = dialog.findViewById<Button>(R.id.coloring_cancel_btn)
 
-                title.text = "저장 하시겠습니까?"
+                dialog.window!!.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                dialog.window!!.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
-                dialog.show()
-
-                dialog.window.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-
-                dialog.window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
-
-                ok_btn.setOnClickListener {
-                    dialog.dismiss()
-
+                dialog.dialog_coloring_tv.text = "저장 하시겠습니까?"
+                dialog.coloring_ok_btn.setOnClickListener {
                     toast("저장이 완료되었습니다.")
+                    dialog.dismiss()
                     finish()
                 }
+                dialog.coloring_cancel_btn.setOnClickListener { dialog.dismiss() }
 
-                cancel_btn.setOnClickListener { dialog.dismiss() }
+                dialog.show()
             }
-
-            else -> null
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
     }
 
     override fun onPause() {
         super.onPause()
-        coloring_frame.setStateImage()
-        coloring_frame.resid = resid
-        Log.d("SAVEDEBUG",resid.toString())
-        Log.d("rere","pause " + current_bitmap.toString())
-    }
-
-    override fun onStop() {
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-
+        coloring_work_view.setStateImage()
+        coloring_work_view.resid = resId
+        Log.d("SAVEDEBUG", resId.toString())
+        Log.d("rere", "pause " + currentBitmap.toString())
     }
 }

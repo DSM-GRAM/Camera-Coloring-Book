@@ -1,16 +1,15 @@
-package coloring.com.camera_coloring_book.adapter
+package coloring.com.ccb.adapter
 
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.coloringlib.ColoringView
-import coloring.com.camera_coloring_book.model.ARGB
-import coloring.com.camera_coloring_book.ui.palette.PaletteFragment.Companion.behavior
+import coloring.com.ccb.R
+import coloring.com.ccb.coloringlib.ColoringView
+import coloring.com.ccb.model.ARGB
+import coloring.com.ccb.ui.palette.PaletteFragment.Companion.behavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.item_palette.view.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -58,19 +57,15 @@ class PaletteAdapter(private val context: Context,
         }
         holder.itemView.color_view.setOnClickListener {
             when(paletteType){
-                MY_PALETTE_MODIFY ->{
-
-                }
+                MY_PALETTE_MODIFY ->{ }
                 COLORING_WORK ->{
                     val argb = toHexString(colorList[position].A).toTwo() +
                             toHexString(colorList[position].R).toTwo()  +
                             toHexString(colorList[position].G).toTwo() +
                             toHexString(colorList[position].B).toTwo()
 
-                    Log.i("PaletteAdapter", argb)
-
+                    coloringBook!!.setPaintColor(Color.argb(colorList[position].A, colorList[position].R, colorList[position].G, colorList[position].B))
                     context.toast("색이 변경되었습니다.")
-                    coloringBook!!.setPaintColor("#$argb".toInt())
                 }
             }
         }

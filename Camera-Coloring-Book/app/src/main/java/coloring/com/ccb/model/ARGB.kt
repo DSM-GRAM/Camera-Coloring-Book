@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.model
+package coloring.com.ccb.model
 
 class ARGB constructor() {
     var A : Int = 0

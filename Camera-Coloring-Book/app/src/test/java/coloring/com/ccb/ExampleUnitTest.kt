@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book
+package coloring.com.ccb
 
 import org.junit.Test
 

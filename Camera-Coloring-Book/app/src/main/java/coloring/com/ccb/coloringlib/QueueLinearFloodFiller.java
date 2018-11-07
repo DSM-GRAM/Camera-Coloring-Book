@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.coloringlib;
+package coloring.com.ccb.coloringlib;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

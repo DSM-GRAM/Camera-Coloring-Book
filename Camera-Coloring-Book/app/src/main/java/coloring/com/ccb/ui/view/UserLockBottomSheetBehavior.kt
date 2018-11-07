@@ -1,11 +1,10 @@
-package coloring.com.camera_coloring_book.ui.view
+package coloring.com.ccb.ui.view
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import android.view.MotionEvent
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 

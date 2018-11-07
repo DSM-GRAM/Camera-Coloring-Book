@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <coloring.com.camera_coloring_book.ui.view.Circle
+    <coloring.com.ccb.ui.view.Circle
         android:id="@+id/color_view"
         android:layout_width="42dp"
         android:layout_height="42dp"

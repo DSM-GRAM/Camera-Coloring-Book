@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.coloringlib;
+package coloring.com.ccb.coloringlib;
 
 /**
  * Created by seotm on 01.08.17.

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -46,7 +45,7 @@
             android:orientation="vertical"
             app:behavior_hideable="false"
             app:behavior_peekHeight="0dp"
-            app:layout_behavior="coloring.com.camera_coloring_book.ui.view.UserLockBottomSheetBehavior">
+            app:layout_behavior="coloring.com.ccb.ui.view.UserLockBottomSheetBehavior">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/album_recycler"
@@ -65,10 +64,10 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/btn_background"
                 android:fontFamily="@font/nanum_square_r"
+                android:onClick="onClick"
                 android:text="직접 사진 찍기"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
-                android:onClick="onClick"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

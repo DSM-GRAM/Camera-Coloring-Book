@@ -1,9 +1,9 @@
-package coloring.com.camera_coloring_book.coloringlib.draws.image;
+package coloring.com.ccb.coloringlib.draws.image;
 
 import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
-import coloring.com.camera_coloring_book.coloringlib.draws.ViewSize;
+import coloring.com.ccb.coloringlib.draws.ViewSize;
 
 /**
  * Created by seotm on 09.06.17.

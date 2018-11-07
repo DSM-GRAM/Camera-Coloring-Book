@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.ui.palette
+package coloring.com.ccb.ui.palette
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -12,18 +12,18 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.model.ARGB
-import coloring.com.camera_coloring_book.ui.MainActivity
-import coloring.com.camera_coloring_book.ui.adapter.AlbumAdapter
-import coloring.com.camera_coloring_book.adapter.PaletteAdapter
+import coloring.com.ccb.R
+import coloring.com.ccb.model.ARGB
+import coloring.com.ccb.ui.MainActivity
+import coloring.com.ccb.adapter.AlbumAdapter
+import coloring.com.ccb.adapter.PaletteAdapter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_palette.*
 import kotlin.collections.ArrayList
-import coloring.com.camera_coloring_book.TinyDB
+import coloring.com.ccb.util.TinyDB
 
 
 class PaletteFragment : Fragment(){
