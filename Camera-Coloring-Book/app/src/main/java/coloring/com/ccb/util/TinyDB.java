@@ -19,7 +19,7 @@
  *  and unicode 2017 that are used for separating the items in a list.
  */
 
-package coloring.com.camera_coloring_book;
+package coloring.com.ccb;
 
 import android.content.Context;
 import android.content.SharedPreferences;

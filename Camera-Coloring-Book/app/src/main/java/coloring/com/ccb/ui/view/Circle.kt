@@ -3,25 +3,15 @@ package coloring.com.camera_coloring_book.ui.view
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.widget.TextView
-import coloring.com.camera_coloring_book.R
+import android.view.View
 
-class Circle : TextView {
-
+class Circle : View {
     private var mRadius: Float = 0.toFloat()
     private var backgroundColor: Int? = 0
 
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context, attrs)
-    }
-
-    private fun init(context: Context, attrs: AttributeSet) {
-/*        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.circleTextView)
-        backgroundColor = typedArray.getColor(R.styleable.circleTextView_ct_backgroundColor, Color.TRANSPARENT)
-        typedArray.recycle()*/
-    }
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     override fun onDraw(canvas: Canvas) {
         val paint = Paint()

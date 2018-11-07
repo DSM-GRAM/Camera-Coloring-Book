@@ -13,16 +13,13 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
-/*
-TODO : 색깔들 저장 방법 찾기
-*/
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tabLayout.addTab(tabLayout.newTab().setText("내 팔레트"))
-        tabLayout.addTab(tabLayout.newTab().setText("내 컬러링"))
+        tabLayout.addTab(tabLayout.newTab().setText("컬러링"))
 
         viewPager.adapter = TabPagerAdapter(supportFragmentManager, tabLayout.tabCount)
         viewPager.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabLayout))

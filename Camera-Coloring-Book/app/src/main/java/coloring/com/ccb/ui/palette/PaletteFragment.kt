@@ -2,8 +2,6 @@ package coloring.com.camera_coloring_book.ui.palette
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
-import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
@@ -18,17 +16,13 @@ import coloring.com.camera_coloring_book.R
 import coloring.com.camera_coloring_book.model.ARGB
 import coloring.com.camera_coloring_book.ui.MainActivity
 import coloring.com.camera_coloring_book.ui.adapter.AlbumAdapter
-import coloring.com.camera_coloring_book.ui.adapter.PaletteAdapter
+import coloring.com.camera_coloring_book.adapter.PaletteAdapter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import kotlinx.android.synthetic.main.fragment_palette.*
-import java.util.*
 import kotlin.collections.ArrayList
-import android.content.Context.MODE_PRIVATE
-import android.content.SharedPreferences
-import android.content.Context.MODE_PRIVATE
 import coloring.com.camera_coloring_book.TinyDB
 
 
@@ -45,7 +39,7 @@ class PaletteFragment : Fragment(){
 
         behavior = BottomSheetBehavior.from(album_list_bottom_sheet)
 
-        paletteAdapter = PaletteAdapter(context!!, 0, loadSharedPreferencesData())
+        paletteAdapter = PaletteAdapter(context!!, 0, loadSharedPreferencesData(), null)
         paletteAdapter.notifyDataSetChanged()
         getAllImages((activity as MainActivity?)!!)
 

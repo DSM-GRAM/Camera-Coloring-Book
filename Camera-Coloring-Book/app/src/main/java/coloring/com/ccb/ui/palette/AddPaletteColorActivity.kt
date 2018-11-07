@@ -1,4 +1,4 @@
-package coloring.com.camera_coloring_book.ui.palette
+package coloring.com.ccb.ui.palette
 
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -9,10 +9,10 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.TinyDB
-import coloring.com.camera_coloring_book.model.ARGB
-import coloring.com.camera_coloring_book.ui.adapter.PaletteAdapter
+import coloring.com.ccb.R
+import coloring.com.ccb.util.TinyDB
+import coloring.com.ccb.model.ARGB
+import coloring.com.ccb.adapter.PaletteAdapter
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.flexbox.JustifyContent
@@ -38,7 +38,7 @@ class AddColorActivity : AppCompatActivity(), View.OnTouchListener{
 
         img.setOnTouchListener(this)
 
-        paletteAdapter = PaletteAdapter(this, 1, loadSharedPreferencesData())
+        paletteAdapter = PaletteAdapter(this, 1, loadSharedPreferencesData(), null)
         val paletteLayoutManager
                 = FlexboxLayoutManager(this).apply {
             flexDirection = FlexDirection.COLUMN

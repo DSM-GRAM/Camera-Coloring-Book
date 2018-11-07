@@ -11,38 +11,26 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
-import coloring.com.camera_coloring_book.ColoringViewModel
 import coloring.com.camera_coloring_book.R
-import coloring.com.camera_coloring_book.TinyDB
-import coloring.com.camera_coloring_book.Util.DataBindingActivity
 import coloring.com.camera_coloring_book.coloringlib.ColoringView
-import coloring.com.camera_coloring_book.databinding.ActivityColoringBinding
-import coloring.com.camera_coloring_book.model.ARGB
-import coloring.com.camera_coloring_book.ui.palette.PaletteAdapter
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
 import kotlinx.android.synthetic.main.activity_coloring.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast
 
-class ColoringActivity : DataBindingActivity<ActivityColoringBinding>() {
-    override fun getLayoutId(): Int = R.layout.activity_coloring
-
+class ColoringActivity : AppCompatActivity() {
+    lateinit var coloring_frame : ColoringView
     var current_bitmap : Bitmap? = null
     var resid : Int = 0
-    lateinit var coloring_frame : ColoringView
 
-    val viewModel by lazy { ViewModelProviders.of(this)[ColoringViewModel::class.java] }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coloring)
-
-        binding.viewModel = viewModel
 
         resid = intent.extras.getInt("resid")
 
@@ -67,22 +55,6 @@ class ColoringActivity : DataBindingActivity<ActivityColoringBinding>() {
 //        }
 
 //        coloring_coloringview.addView(zoom)
-
-        val paletteAdapter = PaletteAdapter(this, 2, loadSharedPreferencesData(), coloring_frame, viewModel)
-        paletteAdapter.notifyDataSetChanged()
-
-        val paletteLayoutManager
-                = FlexboxLayoutManager(this).apply {
-            flexDirection = FlexDirection.COLUMN
-            justifyContent = JustifyContent.CENTER
-        }
-
-        coloring_palette_rv.apply {
-            adapter = paletteAdapter
-            layoutManager = paletteLayoutManager
-        }
-
-
 
         coloring_frame.setOnTouchListener { view, motionEvent ->
             when(motionEvent.action){
@@ -162,11 +134,8 @@ class ColoringActivity : DataBindingActivity<ActivityColoringBinding>() {
         }
     }
 
-
-
-    private fun loadSharedPreferencesData() : ArrayList<ARGB> {
-        val db = TinyDB(this)
-        return db.getListObject("color", ARGB::class.java) as ArrayList<ARGB>
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onPause() {
@@ -177,4 +146,16 @@ class ColoringActivity : DataBindingActivity<ActivityColoringBinding>() {
         Log.d("rere","pause " + current_bitmap.toString())
     }
 
+    override fun onStop() {
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+
+    }
 }
